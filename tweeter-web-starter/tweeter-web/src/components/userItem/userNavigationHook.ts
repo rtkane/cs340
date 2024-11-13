@@ -16,6 +16,8 @@ const userNavigationHook = (): NavigationListener => {
         try {
             const alias = extractAlias(event.target.toString());
 
+
+
             const user = await getUser(authToken!, alias);
 
             if (user) {
