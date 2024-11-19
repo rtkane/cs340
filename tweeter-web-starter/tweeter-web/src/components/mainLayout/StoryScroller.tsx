@@ -26,12 +26,7 @@ const StoryScroller = () => {
         reset();
     }, [displayedUser]);
 
-    // Load initial items whenever the displayed user changes. Done in a separate useEffect hook so the changes from reset will be visible.
-    useEffect(() => {
-        if (changedDisplayedUser) {
-            loadMoreItems();
-        }
-    }, [changedDisplayedUser]);
+
 
     // Add new items whenever there are new items to add
     useEffect(() => {
@@ -48,54 +43,13 @@ const StoryScroller = () => {
         setChangedDisplayedUser(true);
     }
 
-    const loadMoreItems = async () => {
-        try {
-            const [newItems, hasMore] = await loadMoreStoryItems(
-                authToken!,
-                displayedUser!.alias,
-                PAGE_SIZE,
-                lastItem
-            );
 
-            setHasMoreItems(hasMore);
-            setLastItem(newItems[newItems.length - 1]);
-            addItems(newItems);
-            setChangedDisplayedUser(false)
-        } catch (error) {
-            displayErrorMessage(
-                `Failed to load story items because of exception: ${error}`
-            );
-        }
-    };
 
-    const loadMoreStoryItems = async (
-        authToken: AuthToken,
-        userAlias: string,
-        pageSize: number,
-        lastItem: Status | null
-    ): Promise<[Status[], boolean]> => {
-        // TODO: Replace with the result of calling server
-        return FakeData.instance.getPageOfStatuses(lastItem, pageSize);
-    };
+
 
     return (
         <div className="container px-0 overflow-visible vh-100">
-            <InfiniteScroll
-                className="pr-0 mr-0"
-                dataLength={items.length}
-                next={loadMoreItems}
-                hasMore={hasMoreItems}
-                loader={<h4>Loading...</h4>}
-            >
-                {items.map((item, index) => (
-                    <div
-                        key={index}
-                        className="row mb-3 mx-0 px-0 border rounded bg-white"
-                    >
-                        <StatusItem user={item.user} status={item}/>
-                    </div>
-                ))}
-            </InfiniteScroll>
+
         </div>
     );
 };
