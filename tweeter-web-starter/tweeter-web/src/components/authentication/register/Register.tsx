@@ -1,7 +1,7 @@
 import "./Register.css";
 import "bootstrap/dist/css/bootstrap.css";
-import {ChangeEvent, useState} from "react";
-import {Link} from "react-router-dom";
+import { ChangeEvent, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import AuthenticationFormLayout from "../AuthenticationFormLayout";
 import useToastListener from "../../toaster/ToastListenerHook";
 import AuthenticationFields from "../AuthenticationFields";
@@ -17,9 +17,11 @@ const Register = () => {
     const [imageUrl, setImageUrl] = useState<string>("");
     const [imageFileExtension, setImageFileExtension] = useState<string>("");
     const [rememberMe, setRememberMe] = useState(false);
-    const {updateUserInfo} = useInfoHook();
-    const {displayErrorMessage} = useToastListener();
     const [isLoading, setIsLoading] = useState(false);
+
+    const navigate = useNavigate();
+    const { updateUserInfo } = useInfoHook();
+    const { displayErrorMessage } = useToastListener();
 
     const checkSubmitButtonStatus = (): boolean => {
         return (
@@ -40,10 +42,6 @@ const Register = () => {
 
     const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
         const file = event.target.files?.[0];
-        handleImageFile(file);
-    };
-
-    const handleImageFile = (file: File | undefined) => {
         presenter.handleImageFile(file);
     };
 
@@ -51,15 +49,17 @@ const Register = () => {
     const listener: RegisterView = {
         displayErrorMessage: displayErrorMessage,
         updateUserInfo: updateUserInfo,
+        navigate: navigate,
+        setImageUrl: setImageUrl,
+        setImageBytes: setImageBytes,
+        setImageFileExtension: setImageFileExtension
     }
 
     const presenter = new RegisterPresenter(listener);
 
-
     const doRegister = async () => {
         await presenter.doRegister(firstName, lastName, alias, password, imageBytes, imageFileExtension, rememberMe);
     };
-
 
     const inputFieldGenerator = () => {
         return (
@@ -88,8 +88,7 @@ const Register = () => {
                     />
                     <label htmlFor="lastNameInput">Last Name</label>
                 </div>
-                <AuthenticationFields setAlias={(event) => setAlias(event.target.value)}
-                                      setPassword={(event) => setPassword(event.target.value)}/>
+                <AuthenticationFields setAlias={(event) => setAlias(event.target.value)} setPassword={(event) => setPassword(event.target.value)} />
                 <div className="form-floating mb-3">
                     <input
                         type="file"

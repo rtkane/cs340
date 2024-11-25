@@ -1,55 +1,47 @@
 import {UserService} from "../model/service/UserService";
-import {useNavigate} from "react-router-dom";
 import {Buffer} from "buffer";
 import {AuthPresenter, UserView} from "./AuthPresenter";
 
-export interface RegisterView extends UserView {
-
+export interface RegisterView extends UserView{
+    setImageUrl: (url: string) => void;
+    setImageBytes: (imageBytes: Uint8Array) => void;
+    setImageFileExtension: (imageFileExtension: string) => void;
 }
 
-export class RegisterPresenter extends AuthPresenter {
-    private registerService: UserService;
-    private navigate = useNavigate();
-    private imageUrl: string = "";
-    private imageBytes: Uint8Array = new Uint8Array();
-    private imageFileExtension = "";
+export class RegisterPresenter extends AuthPresenter{
 
+    private service: UserService;
 
-    public constructor(view: RegisterView) {
+    public constructor(view: RegisterView){
         super(view);
-        this.registerService = new UserService();
+        this.service = new UserService();
     }
 
-    public async doRegister(
-        firstName: string,
-        lastName: string,
-        alias: string,
-        password: string,
-        imageBytes: Uint8Array,
-        imageFileExtension: string,
-        rememberMe: boolean
-    ): Promise<void> {
+    protected get view(): RegisterView {
+        return super.view as RegisterView;
+    }
+
+    public async doRegister (firstName: string, lastName: string, alias: string, password: string,
+                             imageBytes: Uint8Array, imageFileExtension: string, rememberMe: boolean) {
         await this.doUserAuthOperation(
-            "register user",
-            () =>
-                this.registerService.register(
-                    firstName,
-                    lastName,
-                    alias,
-                    password,
-                    imageBytes,
-                    imageFileExtension
-                ),
-            (user, authToken) => {
-            },
+            "regisrter user",
+            () => this.service.register(
+                firstName,
+                lastName,
+                alias,
+                password,
+                imageBytes,
+                imageFileExtension
+            ),
+            (user, authToken) => {},
             rememberMe,
             "/"
-        );
-    }
+        )
+    };
 
-    public handleImageFile = (file: File | undefined) => {
+    public  handleImageFile = (file: File | undefined) => {
         if (file) {
-            this.imageUrl = (URL.createObjectURL(file));
+            this.view.setImageUrl(URL.createObjectURL(file));
 
             const reader = new FileReader();
             reader.onload = (event: ProgressEvent<FileReader>) => {
@@ -64,22 +56,24 @@ export class RegisterPresenter extends AuthPresenter {
                     "base64"
                 );
 
-                this.imageBytes = bytes;
+                this.view.setImageBytes(bytes);
             };
             reader.readAsDataURL(file);
 
             // Set image file extension (and move to a separate method)
             const fileExtension = this.getFileExtension(file);
             if (fileExtension) {
-                this.imageFileExtension = fileExtension;
+                this.view.setImageFileExtension(fileExtension);
             }
         } else {
-            this.imageUrl = "";
-            this.imageBytes = new Uint8Array();
+            this.view.setImageUrl("");
+            this.view.setImageBytes(new Uint8Array());
         }
     };
 
-    private getFileExtension = (file: File): string | undefined => {
+    public getFileExtension = (file: File): string | undefined => {
         return file.name.split(".").pop();
     };
+
+
 }
