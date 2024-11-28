@@ -1,0 +1,6 @@
+BUCKET='cs340rtkane'
+LAMBDA_ROLE='arn:aws:lambda:us-west-2:920373015645:function:tweeter_server'
+EDIT_LAMBDALIST='
+tweeterGetFollowees | lambda/follow/GetFolloweesLambda.handler
+'
+LAMBDALAYER_ARN='arn:aws:lambda:us-west-2:920373015645:layer:tweeterLambdaLayer:3'
