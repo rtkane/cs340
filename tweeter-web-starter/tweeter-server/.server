@@ -1,6 +1,10 @@
 BUCKET='cs340rtkane'
 LAMBDA_ROLE='arn:aws:lambda:us-west-2:920373015645:function:tweeter_server'
 EDIT_LAMBDALIST='
-tweeterGetFollowees | lambda/follow/GetFolloweesLambda.handler
+tweeter_server | lambda/follow/GetFolloweesLambda.handler
+tweeterGetFollowers | lambda/follow/GetFollowersLambda.handler
+tweeterGetFeed | lambda/status/GetFeedItemsLambda.handler
+tweeterGetStory | lambda/status/GetStoryItemsLambda.handler
+
 '
-LAMBDALAYER_ARN='arn:aws:lambda:us-west-2:920373015645:layer:tweeterLambdaLayer:3'
+LAMBDALAYER_ARN='arn:aws:lambda:us-west-2:920373015645:layer:tweeterLambdaLayer:5'
