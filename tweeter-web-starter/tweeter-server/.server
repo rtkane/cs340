@@ -5,6 +5,9 @@ tweeter_server | lambda/follow/GetFolloweesLambda.handler
 tweeterGetFollowers | lambda/follow/GetFollowersLambda.handler
 tweeterGetFeed | lambda/status/GetFeedItemsLambda.handler
 tweeterGetStory | lambda/status/GetStoryItemsLambda.handler
+tweeterGetFolloweeCount | lambda/follow/GetFolloweeCountLambda.handler
+tweeterGetFollowerCount | lambda/follow/GetFollowerCountLambda.handler
+
 
 '
 LAMBDALAYER_ARN='arn:aws:lambda:us-west-2:920373015645:layer:tweeterLambdaLayer:5'

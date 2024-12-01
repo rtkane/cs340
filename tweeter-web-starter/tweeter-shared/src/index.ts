@@ -17,10 +17,12 @@ export type { StatusDto } from "./model/dto/StatusDto";
 //Requests
 export type { PagedUserItemRequest } from "./model/net/request/PagedUserItemRequest"
 export type { PagedStatusItemRequest } from "./model/net/request/PagedStatusItemRequest"
+export type { FollowCountRequest } from "./model/net/request/FollowCountRequest";
 
 //Responses
 export type { PagedUserItemResponse } from "./model/net/response/PagedUserItemResponse"
 export type { PagedStatusItemResponse } from "./model/net/response/PagedStatusItemResponse"
+export type { FollowCountResponse } from "./model/net/response/FollowCountResponse";
 
 //Others
 export { FakeData } from "./util/FakeData";
