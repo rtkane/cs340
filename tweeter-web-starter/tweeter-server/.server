@@ -7,6 +7,9 @@ tweeterGetFeed | lambda/status/GetFeedItemsLambda.handler
 tweeterGetStory | lambda/status/GetStoryItemsLambda.handler
 tweeterGetFolloweeCount | lambda/follow/GetFolloweeCountLambda.handler
 tweeterGetFollowerCount | lambda/follow/GetFollowerCountLambda.handler
+tweeterPostStatus | lambda/status/PostStatusLambda.handler
+tweeterLogin | lambda/user/LoginLambda.handler
+tweeterRegister | lambda/user/RegisterLambda.handler
 
 
 '

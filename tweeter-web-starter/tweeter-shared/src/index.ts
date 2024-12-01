@@ -18,11 +18,17 @@ export type { StatusDto } from "./model/dto/StatusDto";
 export type { PagedUserItemRequest } from "./model/net/request/PagedUserItemRequest"
 export type { PagedStatusItemRequest } from "./model/net/request/PagedStatusItemRequest"
 export type { FollowCountRequest } from "./model/net/request/FollowCountRequest";
+export type { PostStatusRequest } from "./model/net/request/PostStatusRequest";
+export type { LoginRequest } from "./model/net/request/LoginRequest";
+export type { RegisterRequest } from "./model/net/request/RegisterRequest";
 
 //Responses
 export type { PagedUserItemResponse } from "./model/net/response/PagedUserItemResponse"
 export type { PagedStatusItemResponse } from "./model/net/response/PagedStatusItemResponse"
 export type { FollowCountResponse } from "./model/net/response/FollowCountResponse";
+export type { PostStatusResponse } from "./model/net/response/PostStatusResponse";
+export type { LoginResponse } from "./model/net/response/LoginResponse";
+export type { RegisterResponse } from "./model/net/response/RegisterResponse";
 
 //Others
 export { FakeData } from "./util/FakeData";
