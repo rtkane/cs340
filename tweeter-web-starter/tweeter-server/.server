@@ -10,7 +10,10 @@ tweeterGetFollowerCount | lambda/follow/GetFollowerCountLambda.handler
 tweeterPostStatus | lambda/status/PostStatusLambda.handler
 tweeterLogin | lambda/user/LoginLambda.handler
 tweeterRegister | lambda/user/RegisterLambda.handler
-
+tweeterLogout | lambda/user/LogoutLambda.handler
+tweeterUnfollow | lambda/user/UnfollowLambda.handler
+tweeterGetIsFollowerStatus | lambda/user/GetIsFollowerStatusLambda.handler
+tweeterFollow | lambda/user/FollowLambda.handler
 
 '
 LAMBDALAYER_ARN='arn:aws:lambda:us-west-2:920373015645:layer:tweeterLambdaLayer:5'

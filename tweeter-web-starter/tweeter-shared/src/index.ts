@@ -21,7 +21,10 @@ export type { FollowCountRequest } from "./model/net/request/FollowCountRequest"
 export type { PostStatusRequest } from "./model/net/request/PostStatusRequest";
 export type { LoginRequest } from "./model/net/request/LoginRequest";
 export type { RegisterRequest } from "./model/net/request/RegisterRequest";
-
+export type { GetIsFollowerStatusRequest } from "./model/net/request/GetIsFollowerStatusRequest"
+export type { LogoutRequest } from "./model/net/request/LogoutRequest";
+export type { UnfollowRequest } from "./model/net/request/UnfollowRequest";
+export type { FollowRequest } from "./model/net/request/FollowRequest";
 //Responses
 export type { PagedUserItemResponse } from "./model/net/response/PagedUserItemResponse"
 export type { PagedStatusItemResponse } from "./model/net/response/PagedStatusItemResponse"
@@ -29,6 +32,10 @@ export type { FollowCountResponse } from "./model/net/response/FollowCountRespon
 export type { PostStatusResponse } from "./model/net/response/PostStatusResponse";
 export type { LoginResponse } from "./model/net/response/LoginResponse";
 export type { RegisterResponse } from "./model/net/response/RegisterResponse";
+export type { GetIsFollowerStatusResponse } from "./model/net/response/GetIsFollowerStatusResponse";
+export type { LogoutResponse } from "./model/net/response/LogoutResponse";
+export type { UnfollowResponse } from "./model/net/response/UnfollowResponse";
+export type { FollowResponse } from "./model/net/response/FollowResponse";
 
 //Others
 export { FakeData } from "./util/FakeData";
