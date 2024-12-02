@@ -1,6 +1,10 @@
-import {AuthToken, FakeData, User} from "tweeter-shared";
+import {AuthToken, PagedUserItemRequest, PagedUserItemResponse, User} from "tweeter-shared";
+import {ServerFacade} from "../../network/ServerFacade";
 
 export class FollowService {
+    private serverFacade = new ServerFacade();
+
+
 
     public async loadMoreFollowers(
         authToken: AuthToken,
@@ -8,9 +12,20 @@ export class FollowService {
         pageSize: number,
         lastItem: User | null
     ): Promise<[User[], boolean]> {
-        // TODO: Replace with the result of calling server
-        return FakeData.instance.getPageOfUsers(lastItem, pageSize, userAlias);
-    };
+        const lastItemDto = lastItem ? lastItem.dto : null;
+        const token: string  = authToken.token
+        const request: PagedUserItemRequest = {
+            token: token,
+            userAlias,
+            pageSize,
+            lastItem: lastItemDto,
+        };
+
+        const response: PagedUserItemResponse = await this.serverFacade.loadMoreFollowers(request);
+        const users = response.items!.map(User.fromDto).filter((user): user is User => user !== null);
+
+        return [users, response.hasMore];
+    }
 
     public async loadMoreFollowees(
         authToken: AuthToken,
@@ -18,8 +33,23 @@ export class FollowService {
         pageSize: number,
         lastItem: User | null
     ): Promise<[User[], boolean]> {
-        // TODO: Replace with the result of calling server
-        return FakeData.instance.getPageOfUsers(lastItem, pageSize, userAlias);
+        const lastItemDto = lastItem ? lastItem.dto : null;
+        const token: string  = authToken.token
+        const request: PagedUserItemRequest = {
+            token: token,
+            userAlias,
+            pageSize,
+            lastItem: lastItemDto,
+        };
+
+        const response: PagedUserItemResponse = await this.serverFacade.loadMoreFollowees(request);
+        const users = response.items!.map(User.fromDto).filter((user): user is User => user !== null);
+
+        return [users, response.hasMore];
     };
+
+
+
+
 
 }

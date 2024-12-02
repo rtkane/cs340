@@ -36,6 +36,7 @@ export type { GetIsFollowerStatusResponse } from "./model/net/response/GetIsFoll
 export type { LogoutResponse } from "./model/net/response/LogoutResponse";
 export type { UnfollowResponse } from "./model/net/response/UnfollowResponse";
 export type { FollowResponse } from "./model/net/response/FollowResponse";
+export type { TweeterResponse } from "./model/net/response/TweeterResponse"
 
 //Others
 export { FakeData } from "./util/FakeData";
