@@ -19,20 +19,19 @@ export class UserService {
     private serverFacade = new ServerFacade();
 
 
-
     public async login(
         alias: string,
         password: string
     ): Promise<[User, AuthToken]> {
-        const loginRequest: LoginRequest = { alias, password };
+        const loginRequest: LoginRequest = {alias, password};
 
-            const loginResponse: LoginResponse = await this.serverFacade.login(
-                loginRequest
-            );
+        const loginResponse: LoginResponse = await this.serverFacade.login(
+            loginRequest
+        );
 
-            const user = User.fromDto(loginResponse.items)
+        const user = User.fromDto(loginResponse.items)
 
-            return [user!, new AuthToken(loginResponse.token, 1)];
+        return [user!, new AuthToken(loginResponse.token, 1)];
 
     }
 
@@ -44,8 +43,9 @@ export class UserService {
         userImageBytes: Uint8Array,
         imageFileExtension: string
     ): Promise<[User, AuthToken]> {
-        const registerRequest: RegisterRequest = { firstName, lastName,
-        alias, password, userImageBytes, imageFileExtension
+        const registerRequest: RegisterRequest = {
+            firstName, lastName,
+            alias, password, userImageBytes, imageFileExtension
         };
 
         const registerResponse: RegisterResponse = await this.serverFacade.register(
@@ -54,10 +54,11 @@ export class UserService {
 
         const user = User.fromDto(registerResponse.items)
 
-        return [user!, new AuthToken(registerResponse.token, 1)];    };
+        return [user!, new AuthToken(registerResponse.token, 1)];
+    };
 
     public async logout(authToken: AuthToken): Promise<void> {
-        const logoutRequest: LogoutRequest = { token: authToken.token };
+        const logoutRequest: LogoutRequest = {token: authToken.token};
         const logoutResponse: LogoutResponse = await this.serverFacade.logout(logoutRequest);
 
     };
@@ -109,7 +110,7 @@ export class UserService {
         return getFolloweeCountResponse.count
     };
 
-    public async follow (
+    public async follow(
         authToken: AuthToken,
         userToFollow: User
     ): Promise<[followerCount: number, followeeCount: number]> {
@@ -124,7 +125,7 @@ export class UserService {
         return [followResponse.followerCount, followResponse.followeeCount];
     };
 
-    public async unfollow  (
+    public async unfollow(
         authToken: AuthToken,
         userToUnfollow: User
     ): Promise<[followerCount: number, followeeCount: number]> {
@@ -138,7 +139,6 @@ export class UserService {
 
         return [unfollowResponse.followerCount, unfollowResponse.followingCount];
     };
-
 
 
 }
