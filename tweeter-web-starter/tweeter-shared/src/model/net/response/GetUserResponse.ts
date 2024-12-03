@@ -1,6 +1,6 @@
-import {User} from "../../domain/User";
 import {TweeterResponse} from "./TweeterResponse";
+import {UserDto} from "../../dto/UserDto";
 
 export interface GetUserResponse extends TweeterResponse{
-    readonly user: User
+    readonly user: UserDto
 }

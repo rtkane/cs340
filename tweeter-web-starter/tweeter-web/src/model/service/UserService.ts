@@ -152,7 +152,9 @@ export class UserService {
         const getUserResponse: GetUserResponse =
             await this.serverFacade.getUser(getUserRequest);
 
-        return getUserResponse.user
+        const user = User.fromDto(getUserResponse.user)
+
+        return user
     };
 
 
