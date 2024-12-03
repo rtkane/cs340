@@ -4,7 +4,7 @@ import {
     FollowRequest,
     FollowResponse,
     GetIsFollowerStatusRequest,
-    GetIsFollowerStatusResponse,
+    GetIsFollowerStatusResponse, GetUserRequest, GetUserResponse,
     LoginRequest,
     LoginResponse,
     LogoutRequest,
@@ -146,6 +146,16 @@ export class ServerFacade {
         const response = await this.clientCommunicator.doPost<
             PostStatusRequest,
             PostStatusResponse
+        >
+        (request, endpoint);
+        return response;
+    }
+
+    async getUser(request: GetUserRequest): Promise<GetUserResponse>{
+        const endpoint = "/user/getUser"
+        const response = await this.clientCommunicator.doPost<
+            GetUserRequest,
+            GetUserResponse
         >
         (request, endpoint);
         return response;

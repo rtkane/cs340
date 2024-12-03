@@ -104,6 +104,14 @@ export class UserService {
         return [followerCount, followeeCount];
     };
 
+    public async getUser  (
+        token: string,
+        alias: string
+    ): Promise<User | null> {
+        // TODO: Replace with the result of calling server
+        return FakeData.instance.findUserByAlias(alias);
+    };
+
 
 
 }

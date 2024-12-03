@@ -25,6 +25,8 @@ export type { GetIsFollowerStatusRequest } from "./model/net/request/GetIsFollow
 export type { LogoutRequest } from "./model/net/request/LogoutRequest";
 export type { UnfollowRequest } from "./model/net/request/UnfollowRequest";
 export type { FollowRequest } from "./model/net/request/FollowRequest";
+export type { GetUserRequest } from "./model/net/request/GetUserRequest";
+
 //Responses
 export type { PagedUserItemResponse } from "./model/net/response/PagedUserItemResponse"
 export type { PagedStatusItemResponse } from "./model/net/response/PagedStatusItemResponse"
@@ -37,6 +39,7 @@ export type { LogoutResponse } from "./model/net/response/LogoutResponse";
 export type { UnfollowResponse } from "./model/net/response/UnfollowResponse";
 export type { FollowResponse } from "./model/net/response/FollowResponse";
 export type { TweeterResponse } from "./model/net/response/TweeterResponse"
+export type { GetUserResponse } from "./model/net/response/GetUserResponse";
 
 //Others
 export { FakeData } from "./util/FakeData";

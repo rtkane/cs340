@@ -1,14 +1,16 @@
 import useToastListener from "../toaster/ToastListenerHook";
-import { AuthToken, FakeData, User } from "tweeter-shared";
+import {AuthToken, FakeData, User} from "tweeter-shared";
 import useInfoHook from "../userInfo/userInfoHook";
+import {UserService} from "../../model/service/UserService";
 
 interface NavigationListener {
     navigateToUser: (event: React.MouseEvent) => Promise<void>;
 }
 
 const userNavigationHook = (): NavigationListener => {
-    const { displayErrorMessage } = useToastListener();
-    const { setDisplayedUser, currentUser, authToken } = useInfoHook();
+    const {displayErrorMessage} = useToastListener();
+    const {setDisplayedUser, currentUser, authToken} = useInfoHook();
+    const userService = new UserService();
 
     const navigateToUser = async (event: React.MouseEvent): Promise<void> => {
         event.preventDefault();
@@ -17,8 +19,7 @@ const userNavigationHook = (): NavigationListener => {
             const alias = extractAlias(event.target.toString());
 
 
-
-            const user = await getUser(authToken!, alias);
+            const user = await userService.getUser(authToken!, alias);
 
             if (user) {
                 if (currentUser?.equals(user)) {
@@ -37,12 +38,10 @@ const userNavigationHook = (): NavigationListener => {
         return value.substring(index);
     };
 
-    const getUser = async (authToken: AuthToken, alias: string): Promise<User | null> => {
-        // Replace with a real server call
-        return FakeData.instance.findUserByAlias(alias);
-    };
 
-    return { navigateToUser };
+
+
+    return {navigateToUser};
 };
 
 export default userNavigationHook;

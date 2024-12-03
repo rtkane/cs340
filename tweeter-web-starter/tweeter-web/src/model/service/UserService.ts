@@ -4,7 +4,7 @@ import {
     FollowCountResponse,
     FollowRequest, FollowResponse,
     GetIsFollowerStatusRequest,
-    GetIsFollowerStatusResponse,
+    GetIsFollowerStatusResponse, GetUserRequest, GetUserResponse,
     LoginRequest,
     LoginResponse,
     LogoutRequest,
@@ -138,6 +138,21 @@ export class UserService {
             await this.serverFacade.unfollow(unfollowRequest);
 
         return [unfollowResponse.followerCount, unfollowResponse.followingCount];
+    };
+
+    public async getUser  (
+        authToken: AuthToken,
+        alias: string
+    ): Promise<User | null> {
+        const getUserRequest: GetUserRequest = {
+            token: authToken.token,
+            alias: alias
+        }
+
+        const getUserResponse: GetUserResponse =
+            await this.serverFacade.getUser(getUserRequest);
+
+        return getUserResponse.user
     };
 
 
